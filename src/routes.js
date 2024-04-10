@@ -2,43 +2,43 @@ import {
     Router
 } from 'express'
 import authMiddleware from './app/middlewares/authMiddleware.js'
-// import ApiPing from './controllers/ApiPing.js'
-// import Session from './controllers/Session.js'
-// import Contact from './controllers/Contact.js'
-// import Role from './controllers/Role.js'
-// import Person from './controllers/Person.js'
-// import Team from './controllers/Team.js'
-// import User from './controllers/User.js'
-// import Theme from './controllers/Theme.js'
-// import Priority from './controllers/Priority.js'
-// import Status from './controllers/Status.js'
-// import Goal from './controllers/Goal.js'
-// import Task from './controllers/Task.js'
-// import Product from './controllers/Product.js'
-// import Material from './controllers/Material.js'
-// import Buyer from './controllers/Buyer.js'
-// import Stock from './controllers/Stock.js'
-// import Supplier from './controllers/Supplier.js'
-// import Purchase from './controllers/Purchase.js'
-// import Sale from './controllers/Sale.js'
-// import SupplierPurchase from './controllers/SupplierPurchase.js'
-// import TeamUser from './controllers/TeamUser.js'
+import ApiPing from './app/controllers/ApiPing.js'
+import Session from './app/controllers/Session.js'
+import Contact from './app/controllers/Contact.js'
+import Person from './app/controllers/Person.js'
+import User from './app/controllers/User.js'
+
 
 const routes = new Router()
 
 routes.use(authMiddleware)
 //Ping
-// routes.get("/ping", ApiPing.index)
+routes.get("/ping", ApiPing.index)
 
 
-// routes.post('/users', User.store)
-// routes.put('/users/:id', User.update)
-// routes.get('/users', User.index)
-// routes.get('/users/:id', User.getById)
-// routes.delete('/users/:id', User.delete)
+//Contact
+routes.get('/contacts/:id', Contact.getById)
+routes.get('/contacts', Contact.index)
+routes.post('/contacts', Contact.store)
+routes.put('/contacts/:id', Contact.update)
+routes.delete('/contacts/:id', Contact.delete)
+
+// People
+routes.post('/people', Person.store)
+routes.put('/people/:id', Person.update)
+routes.get('/people', Person.index)
+routes.get('/people/:id', Person.getById)
+routes.delete('/people/:id', Person.delete)
+
+// User
+routes.post('/users', User.store)
+routes.put('/users/:id', User.update)
+routes.get('/users', User.index)
+routes.get('/users/:id', User.getById)
+routes.delete('/users/:id', User.delete)
 
 // Sessions
-// routes.post('/login', Session.login)
-// routes.put('/change-password/:id', Session.changePass)
+routes.post('/login', Session.login)
+routes.put('/change-password/:id', Session.changePass)
 
 export default routes;

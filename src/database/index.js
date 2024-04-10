@@ -1,8 +1,14 @@
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/database.js';
+import Contact from '../app/models/contact.js';
+import Person from '../app/models/person.js';
+import User from '../app/models/user.js';
+
 
 const models = [
-
+  Contact,
+  Person,
+  User,
 ]
 
 class Database {
