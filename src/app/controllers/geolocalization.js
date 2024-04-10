@@ -21,8 +21,7 @@ class GeolocController {
             }
           });
 		  console.log(response)
-		return res.json(
-			content(response)
+		return res.json(response.data
 		);
 	}
 
