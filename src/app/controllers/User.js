@@ -16,20 +16,11 @@ import {
     date
 } from 'yup';
 import { Op } from "sequelize";
-import Role from '../models/role.js';
 import Contact from '../models/contact.js';
-import Team from '../models/team.js';
-import TeamUser from '../models/teamUser.js';
-import Task from '../models/task.js';
 
 const sequelize = database.connection;
 
 let include = [
-    utils.include(Role, {}, false, null, null, null),
-    utils.include(Team, {}, false, null, null, null),
-    utils.include(TeamUser, {}, false, null, [
-        utils.include(Team, {}, false, null, null, null),
-    ], null),
     utils.include(Person, {}, false, null, [
         utils.include(Contact, {}, false, null, null, null),
     ], null)
@@ -62,35 +53,6 @@ class UserController {
                 where.access_name = {
                     [Op.like]: `%${access_name}%`
                 }
-            }
-
-
-            // let nameWhere = req.query.name;
-            // if (nameWhere) {
-            //     include.push(utils.include(Person, { }, true, null, [
-            //         utils.include(Contact, { name: { [Op.like]:`%${nameWhere}%`} }, true, null, null, null),
-            //     ], null))
-            // } else{
-            //     include.push(utils.include(Person, { }, false, null, [
-            //         utils.include(Contact, { }, false, null, null, null),
-            //     ], null))
-            // }
-
-            let teamWhere = req.query.team;
-            if (teamWhere) {
-                include.push(utils.include(TeamUser, { team: teamWhere }, true, null, [
-                    utils.include(Team, { id: teamWhere }, true, null, null, null),
-                ], null))
-            } else {
-                include.push(utils.include(TeamUser, {}, false, null, [
-                    utils.include(Team, {}, false, null, null, null),
-                ], null))
-            }
-
-
-            let roleWhere = req.query.role;
-            if (roleWhere) {
-                include.push(utils.include(Role, { id: roleWhere }, true, null))
             }
 
             const users = await User.findAll({
@@ -222,8 +184,6 @@ class UserController {
             let user_obj = {
                 access_name: data.access_name,
                 person: person_updated.id,
-                // team: data.team,
-                role: data.role,
                 photo: data.photo,
             }
 

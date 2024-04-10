@@ -21,6 +21,16 @@ module.exports = {
         references: { model: 'person', key: 'id' },
         allowNull: false
       },
+      role: {
+        type: Sequelize.INTEGER,
+        references: { model: 'role', key: 'id' },
+        allowNull: true
+      },
+      team: {
+        type: Sequelize.INTEGER,
+        references: { model: 'team', key: 'id' },
+        allowNull: true
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE
