@@ -7,6 +7,7 @@ import Session from './app/controllers/Session.js'
 import Contact from './app/controllers/Contact.js'
 import Person from './app/controllers/Person.js'
 import User from './app/controllers/User.js'
+import Geoloc from './app/controllers/Geolocalization.js'
 
 
 const routes = new Router()
@@ -36,6 +37,9 @@ routes.put('/users/:id', User.update)
 routes.get('/users', User.index)
 routes.get('/users/:id', User.getById)
 routes.delete('/users/:id', User.delete)
+
+//Geoloc
+routes.get('/geoloc', Geoloc.getGeolocalization)
 
 // Sessions
 routes.post('/login', Session.login)
